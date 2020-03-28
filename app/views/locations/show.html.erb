@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+<% require 'http' %>
+<center>
+<br>
+<br>
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+<section class="ftco-section ftco-wrap-about">
+<div class="heading-section ftco-animate mb-5 text-center">
+  <span class="subheading"><%=@location.name%></span>
+  <h1 class="mb-5">Location</h1>
+  <div class="container">
+    <p>
+      <strong>Name:</strong>
+      <%= @location.name %>
+    </p>
+
+    <p>
+      <strong>Tipo:</strong>
+      <%= @location.tipo %>
+    </p>
+
+    <p>
+      <strong>Dimension:</strong>
+      <%= @location.dimension %>
+    </p>
+
+    <p>
+      <strong>Residents:</strong>
+      <% list = eval(@location.residents) %>
+      <% if (list)%>
+        <% list.each do |char|%>
+          <br>
+          <% info = HTTP.get(char).to_s %>
+          <% hash_info = eval(info) %>
+          <%= link_to hash_info[:name], character_path(hash_info[:id]) %>
+        <% end %>
+      <% end %>
+    </p>
+
+  </div>
+</div>
+</section>
+
+
+<%= link_to 'Back', locations_path %>

@@ -1,0 +1,79 @@
+<p id="notice"><%= notice %></p>
+<% require 'http' %>
+<center>
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+<section class="ftco-section ftco-wrap-about">
+<div class="heading-section ftco-animate mb-5 text-center">
+<span class="subheading"><%=@character.name%></span>
+</div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 wrap-about pt-5 pt-md-5 pb-md-3 ftco-animate">
+          <image  src="<%=@character.image%>" alt= "{{ row.2 }}" width="240" height="189" />
+      </div>
+      <div class="col-md-4 wrap-about pt-5 pt-md-5 pb-md-3 ftco-animate">
+        <p>
+          <strong>Name:</strong>
+          <%= @character.name %>
+        </p>
+
+        <p>
+          <strong>Status:</strong>
+          <%= @character.status %>
+        </p>
+
+        <p>
+          <strong>Species:</strong>
+          <%= @character.species %>
+        </p>
+
+        <p>
+          <strong>Gender:</strong>
+          <%= @character.gender %>
+        </p>
+
+        <p>
+          <strong>Origin:</strong>
+          <br>
+            <% hash_info = eval(@character.origin) %>
+            <% if (hash_info[:name] != "unknown") %>
+              <% info = HTTP.get(hash_info[:url]).to_s %>
+              <% hash_info = eval(info) %>
+              <%= link_to hash_info[:name], location_path(hash_info[:id]) %>
+            <% else %>
+              <%= hash_info[:name]%>
+            <% end %>
+        </p>
+
+        <p>
+          <strong>Location:</strong>
+          <br>
+            <% hash_info = eval(@character.location) %>
+            <% if (hash_info[:name] != "unknown") %>
+              <% info = HTTP.get(hash_info[:url]).to_s %>
+              <% hash_info = eval(info) %>
+              <%= link_to hash_info[:name], location_path(hash_info[:id]) %>
+            <% else %>
+              <%= hash_info[:name]%>
+            <% end %>
+        </p>
+      </div>
+      <div class="col-md-4 wrap-about pt-5 pt-md-5 pb-md-3 ftco-animate">
+
+
+        <p>
+          <strong>Episodes:</strong>
+          <% list = eval(@character.episode) %>
+          <% list.each do |ep| %>
+            <br>
+            <% info = HTTP.get(ep).to_s %>
+            <% hash_info = eval(info) %>
+            <%= link_to hash_info[:name], episode_path(hash_info[:id]) %>
+          <% end %>
+        </p>
+      </div>
+    </div>
+  </section>
+<%= link_to 'Back', characters_path %>

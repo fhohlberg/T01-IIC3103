@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+<center>
+<br>
+<br>
+<br>
+<br>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
+<div class="heading-section ftco-animate mb-5 text-center">
+
+<h1>Locations</h1>
+
+<div class="media">
+  <div class="media-body">
+    <table class="table table">
+      <thead class="thead-light">
+        <tr>
+          <th>Name</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @locations.each do |location| %>
+          <tr>
+            <td><%= link_to location.name, location %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    </div>
+  </div>
+<br>

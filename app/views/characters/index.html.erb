@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+<center>
+<br>
+<br>
+<br>
+<br>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
+<div class="heading-section ftco-animate mb-5 text-center">
+<h1>Characters</h1>
+
+<div class="media">
+  <div class="media-body">
+    <table class="table table">
+      <thead class="thead-light">
+        <tr>
+          <th>Name</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @characters.each do |character| %>
+          <tr>
+            <td><%= link_to character.name, character %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
