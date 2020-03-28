@@ -1,5 +1,4 @@
-**Proyecto Grupo 52**
-Integrantes: Francisca Hohlberg, Elisa Prieto, Araceli Rojas
-# Grupo52-proyecto
+**Tarea 01 - IIC 3103**
+#Francisca Hohlberg
 
-La dirección de la aplicación montada en Heroku es https://g52proyecto.herokuapp.com/
+La dirección de la aplicación montada en Heroku es https://tarea1-fh-iic3103.herokuapp.com/
