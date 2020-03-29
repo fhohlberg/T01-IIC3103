@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-<% require 'http' %>
+
 <center>
 <br>
 <br>
@@ -30,9 +30,8 @@
         <strong>Characters:</strong>
         <% @episode.characters.each do |char|%>
           <br>
-          <% info = HTTP.get(char).to_s %>
-          <% hash_info = eval(info) %>
-          <%= link_to hash_info[:name], character_path(hash_info[:id]) %>
+          <% ch = @characters.where("url LIKE :char", char: char)%>
+          <%= link_to ch[0][:name], character_path(ch[0][:id]) %>
         <% end %>
       </p>
     </div>

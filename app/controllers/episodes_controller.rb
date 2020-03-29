@@ -10,6 +10,7 @@ class EpisodesController < ApplicationController
   # GET /episodes/1
   # GET /episodes/1.json
   def show
+    @characters = Character.all
   end
 
   # GET /episodes/new

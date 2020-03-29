@@ -1,5 +1,4 @@
 <p id="notice"><%= notice %></p>
-<% require 'http' %>
 <center>
 <br>
 
@@ -39,9 +38,8 @@
           <br>
             <% hash_info = eval(@character.origin) %>
             <% if (hash_info[:name] != "unknown") %>
-              <% info = HTTP.get(hash_info[:url]).to_s %>
-              <% hash_info = eval(info) %>
-              <%= link_to hash_info[:name], location_path(hash_info[:id]) %>
+              <% loc = @locations.where("url LIKE :loc", loc: hash_info[:url])%>
+              <%= link_to loc[0][:name], location_path(loc[0][:id]) %>
             <% else %>
               <%= hash_info[:name]%>
             <% end %>
@@ -52,9 +50,8 @@
           <br>
             <% hash_info = eval(@character.location) %>
             <% if (hash_info[:name] != "unknown") %>
-              <% info = HTTP.get(hash_info[:url]).to_s %>
-              <% hash_info = eval(info) %>
-              <%= link_to hash_info[:name], location_path(hash_info[:id]) %>
+              <% loc = @locations.where("url LIKE :loc", loc: hash_info[:url])%>
+              <%= link_to loc[0][:name], location_path(loc[0][:id]) %>
             <% else %>
               <%= hash_info[:name]%>
             <% end %>
@@ -68,9 +65,8 @@
           <% list = @character.episode %>
           <% list.each do |ep| %>
             <br>
-            <% info = HTTP.get(ep).to_s %>
-            <% hash_info = eval(info) %>
-            <%= link_to hash_info[:name], episode_path(hash_info[:id]) %>
+            <% epi = @episodes.where("url LIKE :epi", epi: ep)%>
+            <%= link_to epi[0][:name], episode_path(epi[0][:id]) %>
           <% end %>
         </p>
       </div>
