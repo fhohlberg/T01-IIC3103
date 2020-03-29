@@ -3,4 +3,3 @@
 
 La dirección de la aplicación montada en Heroku es https://tarea1-fh-iic3103.herokuapp.com/
 
-Comentarios: Algunas consultas tardan en cargar (40 - 50 segundos), sobre todo para Locations, ya que se deben cargar muchos personajes (residentes). 
