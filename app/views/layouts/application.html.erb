@@ -34,18 +34,17 @@
           <span class="oi oi-menu"></span>
         </button>
         <div class="collapse navbar-collapse" id="ftco-nav">
-
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item active"><a href="/home" class="nav-link">Rick & Morty</a></li>
-            <li class="nav-item active"><%= form_tag(search_page_path, :method => "get",
-                class: 'navbar-form navbar-left') do %>
-              <div class="input-group">
-                <%= search_field_tag :search, params[:search], placeholder: "Search", class: "form-control" %>
-                <div class="input-group-btn">
-                  <%= button_tag "<i class=material-icons md-dark>search</i>".html_safe, :class => 'btn btn-info',:name => nil%>
-                </div>
+          <a href="/home" class="nav-link">Rick & Morty</a>
+          <%= form_tag(search_page_path, :method => "get",
+              class: 'navbar-form navbar-left') do %>
+            <div class="input-group">
+              <%= search_field_tag :search, params[:search], placeholder: "Search", class: "form-control" %>
+              <div class="input-group-btn">
+                <%= button_tag "<i class=material-icons md-dark>search</i>".html_safe, :class => 'btn btn-info',:name => nil%>
               </div>
-            <% end %></li>
+            </div>
+          <% end %>
+          <ul class="navbar-nav ml-auto">
             <li class="nav-item active"><a href="/episodes" class="nav-link">Episodes</a></li>
             <li class="nav-item active"><a href="/characters" class="nav-link">Charactes</a></li>
             <li class="nav-item active"><a href="/locations" class="nav-link">Locations</a></li>
