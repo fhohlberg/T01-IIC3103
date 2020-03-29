@@ -11,7 +11,8 @@
 </div>
   <div class="container">
     <div class="row">
-      
+      <div class="col-md-3 wrap-about pt-5 pt-md-5 pb-md-3 ftco-animate" style="background-image: url(<%=@character.image%>); background-repeat: no-repeat;" >
+      </div>
       <div class="col-md-4 wrap-about pt-5 pt-md-5 pb-md-3 ftco-animate">
         <p>
           <strong>Name:</strong>
@@ -64,7 +65,7 @@
 
         <p>
           <strong>Episodes:</strong>
-          <% list = eval(@character.episode) %>
+          <% list = @character.episode %>
           <% list.each do |ep| %>
             <br>
             <% info = HTTP.get(ep).to_s %>
