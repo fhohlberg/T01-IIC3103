@@ -8,4 +8,5 @@ class ApplicationController < ActionController::Base
     update_attrs = %i[password password_confirmation current_password address username]
     devise_parameter_sanitizer.permit :account_update, keys: update_attrs
   end
+
 end

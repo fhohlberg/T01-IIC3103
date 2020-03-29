@@ -4,10 +4,14 @@
 <br>
 <br>
 <br>
+
+
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
 
+
 <div class="heading-section ftco-animate mb-5 text-center">
+
 <h1>Episodes</h1>
 
 <div class="media">
@@ -15,6 +19,7 @@
     <table class="table table">
       <thead class="thead-light">
         <tr>
+          <th></th>
           <th>Name</th>
           <th>Air date</th>
           <th>Episode Code</th>
@@ -24,6 +29,7 @@
   <tbody>
     <% @episodes.each do |episode| %>
       <tr>
+        <td><%= episode.id %></td>
         <td><%= link_to episode.name, episode %></td>
         <td><%= episode.air_date %></td>
         <td><%= episode.episode %></td>

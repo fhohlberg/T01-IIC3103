@@ -10,6 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
     <link rel="stylesheet" href="https://colorlib.com/preview/theme/feliciano/css/bootstrap.css">
     <link rel="stylesheet" href="https://colorlib.com/preview/theme/feliciano/css/animate.css">
     <link rel="stylesheet" href="https://colorlib.com/preview/theme/feliciano/css/owl.carousel.min.css">
@@ -26,22 +28,22 @@
   </head>
 
   <body>
-
-    <% if notice %>
-      <p class="alert alert-success"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-      <p class="alert alert-danger"><%= alert %></p>
-    <% end %>
-
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-      <li class="nav-item active"><a href="/" class="nav-link">Rick & Morty</a></li>
-
       <div class="container">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="oi oi-menu"></span>
         </button>
         <div class="collapse navbar-collapse" id="ftco-nav">
+          <a href="/home" class="nav-link">Rick & Morty</a>
+          <%= form_tag(search_page_path, :method => "get",
+              class: 'navbar-form navbar-left') do %>
+            <div class="input-group">
+              <%= search_field_tag :search, params[:search], placeholder: "Search", class: "form-control" %>
+              <div class="input-group-btn">
+                <%= button_tag "<i class=material-icons md-dark>search</i>".html_safe, :class => 'btn btn-info',:name => nil%>
+              </div>
+            </div>
+          <% end %>
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active"><a href="/episodes" class="nav-link">Episodes</a></li>
             <li class="nav-item active"><a href="/characters" class="nav-link">Charactes</a></li>
