@@ -1,3 +1,4 @@
+<% require 'http' %>
 <p id="notice"><%= notice %></p>
 
 <center>
@@ -8,33 +9,38 @@
       rel="stylesheet">
 <section class="ftco-section ftco-wrap-about">
 <div class="heading-section ftco-animate mb-5 text-center">
-  <span class="subheading"><%=@location.name%></span>
+  <span class="subheading"><%=@location[:name]%></span>
   <h1 class="mb-5">Location</h1>
   <div class="container">
     <p>
       <strong>Name:</strong>
-      <%= @location.name %>
+      <%= @location[:name] %>
     </p>
 
     <p>
       <strong>Tipo:</strong>
-      <%= @location.tipo %>
+      <%= @location[:tipo] %>
     </p>
 
     <p>
       <strong>Dimension:</strong>
-      <%= @location.dimension %>
+      <%= @location[:dimension] %>
     </p>
 
     <p>
       <strong>Residents:</strong>
-      <% list = eval(@location.residents) %>
-      <% if (list)%>
-        <% list.each do |char|%>
-          <br>
-          <% ch = @characters.where("url LIKE :char", char: char)%>
-          <%= link_to ch[0][:name], character_path(ch[0][:id]) %>
-        <% end %>
+
+      <% @string_ids = "" %>
+      <% @location[:residents].each do |char|%>
+        <% id_char = char.split("/")[-1] %>
+        <% @string_ids += id_char + "," %>
+      <% end %>
+      <% url_consulta = "https://rickandmortyapi.com/api/character/" + @string_ids%>
+      <% info = HTTP.get(url_consulta).to_s %>
+      <% list_info = eval(info) %>
+      <% list_info.each do |char| %>
+        <br>
+        <%= link_to char[:name], character_path(char[:id]) %>
       <% end %>
     </p>
 

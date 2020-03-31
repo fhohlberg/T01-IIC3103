@@ -20,7 +20,7 @@
               <h6>No episode found.</h6>
             <% end %>
             <% @results_e.each do |result| %>
-                <%= link_to result.name, episode_path(result.id)  %><br>
+                <%= link_to result[:name], episode_path(result[:id])  %><br>
             <% end %>
         </div>
         <div class="col-md-4 wrap-about pt-5 pt-md-5 pb-md-3 ftco-animate">
@@ -29,7 +29,7 @@
               <h6>No character found.</h6>
             <% end %>
             <% @results_c.each do |result| %>
-                <%= link_to result.name, character_path(result.id)  %><br>
+                <%= link_to result[:name], character_path(result[:id])  %><br>
             <% end %>
         </div>
         <div class="col-md-4 wrap-about pt-5 pt-md-5 pb-md-3 ftco-animate">
@@ -38,7 +38,7 @@
               <h6>No location found.</h6>
             <% end %>
             <% @results_l.each do |result| %>
-                <%= link_to result.name, location_path(result.id)  %><br>
+                <%= link_to result[:name], location_path(result[:id])  %><br>
             <% end %>
         </div>
   </div>

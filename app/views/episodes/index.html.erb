@@ -1,3 +1,4 @@
+<% require 'http' %>
 <p id="notice"><%= notice %></p>
 <center>
 <br>
@@ -6,8 +7,6 @@
 <br>
 
 
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
 
 
 <div class="heading-section ftco-animate mb-5 text-center">
@@ -29,10 +28,10 @@
   <tbody>
     <% @episodes.each do |episode| %>
       <tr>
-        <td><%= episode.id %></td>
-        <td><%= link_to episode.name, episode %></td>
-        <td><%= episode.air_date %></td>
-        <td><%= episode.episode %></td>
+        <td><%= episode[:id] %></td>
+        <td><%= link_to episode[:name], episode_path(episode[:id]) %></td>
+        <td><%= episode[:air_date] %></td>
+        <td><%= episode[:episode] %></td>
       </tr>
     <% end %>
   </tbody>

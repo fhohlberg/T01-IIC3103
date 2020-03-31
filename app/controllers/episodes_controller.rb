@@ -1,75 +1,22 @@
+require 'http'
 class EpisodesController < ApplicationController
-  before_action :set_episode, only: [:show, :edit, :update, :destroy]
 
-  # GET /episodes
-  # GET /episodes.json
   def index
-    @episodes = Episode.all
+    #obtengo una lista con todos los episodios en JSON (hash)
+    url = "https://rickandmortyapi.com/api/episode/"
+    url2 = "https://rickandmortyapi.com/api/episode/?page=2"
+    info1 = HTTP.get(url)
+    info2 = HTTP.get(url2)
+    hash_info = eval(info1)
+    list_res = hash_info[:results]
+    hash_info2 = eval(info2)
+    list_res2 = hash_info2[:results]
+    list_res = list_res + list_res2
+    @episodes = list_res
   end
 
-  # GET /episodes/1
-  # GET /episodes/1.json
   def show
-    @characters = Character.all
+    info = HTTP.get("https://rickandmortyapi.com/api/episode/" + params[:id].to_s).to_s
+    @episode = eval(info)
   end
-
-  # GET /episodes/new
-  def new
-    @episode = Episode.new
-  end
-
-  # GET /episodes/1/edit
-  def edit
-  end
-
-  # POST /episodes
-  # POST /episodes.json
-  def create
-    @episode = Episode.new(episode_params)
-
-    respond_to do |format|
-      if @episode.save
-        format.html { redirect_to @episode, notice: 'Episode was successfully created.' }
-        format.json { render :show, status: :created, location: @episode }
-      else
-        format.html { render :new }
-        format.json { render json: @episode.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /episodes/1
-  # PATCH/PUT /episodes/1.json
-  def update
-    respond_to do |format|
-      if @episode.update(episode_params)
-        format.html { redirect_to @episode, notice: 'Episode was successfully updated.' }
-        format.json { render :show, status: :ok, location: @episode }
-      else
-        format.html { render :edit }
-        format.json { render json: @episode.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /episodes/1
-  # DELETE /episodes/1.json
-  def destroy
-    @episode.destroy
-    respond_to do |format|
-      format.html { redirect_to episodes_url, notice: 'Episode was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_episode
-      @episode = Episode.find(params[:id])
-    end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def episode_params
-      params.require(:episode).permit(:id, :name, :air_date, :episode, :characters, :url, :created)
-    end
 end

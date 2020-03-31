@@ -4,35 +4,43 @@
 <br>
 <br>
 
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+
+
 <section class="ftco-section ftco-wrap-about">
 <div class="heading-section ftco-animate mb-5 text-center">
-  <span class="subheading"><%=@episode.name%></span>
+  <span class="subheading"><%=@episode[:name]%></span>
   <h1 class="mb-5">Episode</h1>
   <div class="container">
       <p>
         <strong>Name:</strong>
-        <%= @episode.name %>
+        <%= @episode[:name] %>
       </p>
 
       <p>
         <strong>Air date:</strong>
-        <%= @episode.air_date %>
+        <%= @episode[:air_date] %>
       </p>
 
       <p>
         <strong>Episode Code:</strong>
-        <%= @episode.episode %>
+        <%= @episode[:episode] %>
       </p>
 
       <p>
         <strong>Characters:</strong>
-        <% @episode.characters.each do |char|%>
-          <br>
-          <% ch = @characters.where("url LIKE :char", char: char)%>
-          <%= link_to ch[0][:name], character_path(ch[0][:id]) %>
+        <% @string_ids = "" %>
+        <% @episode[:characters].each do |char|%>
+          <% id_char = char.split("/")[-1] %>
+          <% @string_ids += id_char + "," %>
         <% end %>
+        <% url_consulta = "https://rickandmortyapi.com/api/character/" + @string_ids%>
+        <% info = HTTP.get(url_consulta).to_s %>
+        <% list_info = eval(info) %>
+        <% list_info.each do |char| %>
+          <br>
+          <%= link_to char[:name], character_path(char[:id]) %>
+        <% end %>
+
       </p>
     </div>
 </div>

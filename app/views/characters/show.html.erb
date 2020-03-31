@@ -6,40 +6,41 @@
       rel="stylesheet">
 <section class="ftco-section ftco-wrap-about">
 <div class="heading-section ftco-animate mb-5 text-center">
-<span class="subheading"><%=@character.name%></span>
+<span class="subheading"><%=@character[:name]%></span>
 </div>
   <div class="container">
     <div class="row">
-      <div class="col-md-3 wrap-about pt-5 pt-md-5 pb-md-3 ftco-animate" style="background-image: url(<%=@character.image%>); background-repeat: no-repeat;" >
+      <div class="col-md-3 wrap-about pt-5 pt-md-5 pb-md-3 ftco-animate" style="background-image: url(<%=@character[:image]%>); background-repeat: no-repeat;" >
       </div>
       <div class="col-md-4 wrap-about pt-5 pt-md-5 pb-md-3 ftco-animate">
         <p>
           <strong>Name:</strong>
-          <%= @character.name %>
+          <%= @character[:name] %>
         </p>
 
         <p>
           <strong>Status:</strong>
-          <%= @character.status %>
+          <%= @character[:status] %>
         </p>
 
         <p>
           <strong>Species:</strong>
-          <%= @character.species %>
+          <%= @character[:species] %>
         </p>
 
         <p>
           <strong>Gender:</strong>
-          <%= @character.gender %>
+          <%= @character[:gender] %>
         </p>
 
         <p>
           <strong>Origin:</strong>
           <br>
-            <% hash_info = eval(@character.origin) %>
+            <% hash_info = @character[:origin] %>
             <% if (hash_info[:name] != "unknown") %>
-              <% loc = @locations.where("url LIKE :loc", loc: hash_info[:url])%>
-              <%= link_to loc[0][:name], location_path(loc[0][:id]) %>
+              <% info = HTTP.get(hash_info[:url]).to_s %>
+              <% hash_info = eval(info) %>
+              <%= link_to hash_info[:name], location_path(hash_info[:id]) %>
             <% else %>
               <%= hash_info[:name]%>
             <% end %>
@@ -48,13 +49,14 @@
         <p>
           <strong>Location:</strong>
           <br>
-            <% hash_info = eval(@character.location) %>
-            <% if (hash_info[:name] != "unknown") %>
-              <% loc = @locations.where("url LIKE :loc", loc: hash_info[:url])%>
-              <%= link_to loc[0][:name], location_path(loc[0][:id]) %>
-            <% else %>
-              <%= hash_info[:name]%>
-            <% end %>
+          <% hash_info = @character[:location] %>
+          <% if (hash_info[:name] != "unknown") %>
+            <% info = HTTP.get(hash_info[:url]).to_s %>
+            <% hash_info = eval(info) %>
+            <%= link_to hash_info[:name], location_path(hash_info[:id]) %>
+          <% else %>
+            <%= hash_info[:name]%>
+          <% end %>
         </p>
       </div>
       <div class="col-md-4 wrap-about pt-5 pt-md-5 pb-md-3 ftco-animate">
@@ -62,11 +64,18 @@
 
         <p>
           <strong>Episodes:</strong>
-          <% list = @character.episode %>
+          <% @string_ids = "" %>
+          <% list = @character[:episode] %>
           <% list.each do |ep| %>
+            <% id_ep = ep.split("/")[-1] %>
+            <% @string_ids += id_ep + "," %>
+          <% end %>
+          <% url_consulta = "https://rickandmortyapi.com/api/episode/" + @string_ids%>
+          <% info = HTTP.get(url_consulta).to_s %>
+          <% list_info = eval(info) %>
+          <% list_info.each do |ep| %>
             <br>
-            <% epi = @episodes.where("url LIKE :epi", epi: ep)%>
-            <%= link_to epi[0][:name], episode_path(epi[0][:id]) %>
+            <%= link_to ep[:name], episode_path(ep[:id]) %>
           <% end %>
         </p>
       </div>

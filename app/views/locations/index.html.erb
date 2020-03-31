@@ -25,8 +25,8 @@
       <tbody>
         <% @locations.each do |location| %>
           <tr>
-            <td><%= location.id %></td>
-            <td><%= link_to location.name, location %></td>
+            <td><%= location[:id] %></td>
+            <td><%= link_to location[:name], location_path(location[:id]) %></td>
           </tr>
         <% end %>
       </tbody>
