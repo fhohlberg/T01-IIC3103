@@ -5,12 +5,3 @@ default: &default
   username: postgres
   password:
   pool: 5
-
-development:
-  <<: *default
-  database: Grupo52-proyecto_development
-
-
-test:
-  <<: *default
-  database: Grupo52-proyecto_test
