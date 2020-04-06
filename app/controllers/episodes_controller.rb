@@ -3,8 +3,8 @@ class EpisodesController < ApplicationController
 
   def index
     #obtengo una lista con todos los episodios en JSON (hash)
-    url = "https://rickandmortyapi.com/api/episode/"
-    url2 = "https://rickandmortyapi.com/api/episode/?page=2"
+    url = "https://integracion-rick-morty-api.herokuapp.com/api/episode/"
+    url2 = "https://integracion-rick-morty-api.herokuapp.com/api/episode/?page=2"
     info1 = HTTP.get(url)
     info2 = HTTP.get(url2)
     hash_info = eval(info1)
@@ -16,7 +16,7 @@ class EpisodesController < ApplicationController
   end
 
   def show
-    info = HTTP.get("https://rickandmortyapi.com/api/episode/" + params[:id].to_s).to_s
+    info = HTTP.get("https://integracion-rick-morty-api.herokuapp.com/api/episode/" + params[:id].to_s).to_s
     @episode = eval(info)
   end
 end

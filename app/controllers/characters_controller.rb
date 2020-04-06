@@ -9,12 +9,12 @@ class CharactersController < ApplicationController
     end
     url = "https://rickandmortyapi.com/api/character/" + string_ids
     info = HTTP.get(url).to_s
-    lista_res = eval(info)    
+    lista_res = eval(info)
     @characters = lista_res
   end
 
   def show
-    info =  HTTP.get("https://rickandmortyapi.com/api/character/" + params[:id].to_s).to_s
+    info =  HTTP.get("https://integracion-rick-morty-api.herokuapp.com/api/character/" + params[:id].to_s).to_s
     @character = eval(info)
   end
 

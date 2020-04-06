@@ -4,8 +4,8 @@ class PagesController < ApplicationController
 
   def search
     #obtengo una lista con todos los episodios en JSON (hash)
-    url = "https://rickandmortyapi.com/api/episode/"
-    url2 = "https://rickandmortyapi.com/api/episode/?page=2"
+    url = "https://integracion-rick-morty-api.herokuapp.com/api/episode/"
+    url2 = "https://integracion-rick-morty-api.herokuapp.com/api/episode/?page=2"
     info1 = HTTP.get(url)
     info2 = HTTP.get(url2)
     hash_info = eval(info1)
@@ -20,7 +20,7 @@ class PagesController < ApplicationController
     (1..76).each do |id|
       string_ids += id.to_s + ","
     end
-    url = "https://rickandmortyapi.com/api/location/" + string_ids
+    url = "https://integracion-rick-morty-api.herokuapp.com/api/location/" + string_ids
     info = HTTP.get(url).to_s
     lista_loc = eval(info)
 
@@ -29,7 +29,7 @@ class PagesController < ApplicationController
     (1..493).each do |id|
       string_ids += id.to_s + ","
     end
-    url = "https://rickandmortyapi.com/api/character/" + string_ids
+    url = "https://integracion-rick-morty-api.herokuapp.com/api/character/" + string_ids
     info = HTTP.get(url).to_s
     lista_char = eval(info)
 

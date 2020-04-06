@@ -18,8 +18,8 @@
     </p>
 
     <p>
-      <strong>Tipo:</strong>
-      <%= @location[:tipo] %>
+      <strong>Type:</strong>
+      <%= @location[:type] %>
     </p>
 
     <p>
@@ -35,7 +35,7 @@
         <% id_char = char.split("/")[-1] %>
         <% @string_ids += id_char + "," %>
       <% end %>
-      <% url_consulta = "https://rickandmortyapi.com/api/character/" + @string_ids%>
+      <% url_consulta = "https://integracion-rick-morty-api.herokuapp.com/api/character/" + @string_ids%>
       <% info = HTTP.get(url_consulta).to_s %>
       <% list_info = eval(info) %>
       <% list_info.each do |char| %>
